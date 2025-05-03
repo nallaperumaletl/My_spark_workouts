@@ -1,0 +1,41 @@
+
+# To submit a spark job:
+
+spark-submit \
+  --master spark://<master-node-hostname>:7077 \
+  --conf spark.executor.memory=1g \
+  --conf spark.executor.cores=2 \
+  --conf spark.executor.instances=3 \
+  your_spark_application.py
+
+-------------------------------------------------
+from pyspark.sql import SparkSession
+
+spark = SparkSession \
+    .builder \
+    .appName("Read JSON data") \
+    .master("spark://spark-master:7077") \
+    .config("spark.executor.memory", "1g") \
+    .config("spark.executor.cores", "2") \
+    .config("spark.executor.instances", "3") \
+    .getOrCreate()
+
+spark
+-------------------------------------------------
+
+spark_context = spark_session.sparkContext
+spark_context.setLogLevel("DEBUG")
+
+print("spark.synapse.pool.name : " + spark_session.conf.get("spark.synapse.pool.name")) 
+print("spark.driver.cores : " + spark_session.conf.get("spark.driver.cores")) 
+print("spark.driver.memory : " + spark_session.conf.get("spark.driver.memory")) 
+print("spark.executor.cores : " + spark_session.conf.get("spark.executor.cores")) 
+print("spark.executor.memory : " + spark_session.conf.get("spark.executor.memory")) 
+print("spark.executor.instances: " + spark_session.conf.get("spark.executor.instances")) 
+print() 
+print("spark.dynamicAllocation.enabled : " + spark_session.conf.get("spark.dynamicAllocation.enabled")) 
+print("spark.dynamicAllocation.minExecutors : " + spark_session.conf.get("spark.dynamicAllocation.minExecutors")) 
+print("spark.dynamicAllocation.maxExecutors : " + spark_session.conf.get("spark.dynamicAllocation.maxExecutors")) 
+    
+-------------------------------------------------
+
