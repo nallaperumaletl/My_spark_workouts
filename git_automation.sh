@@ -6,6 +6,7 @@ git status
 
 # Add all files to staging
 echo "Adding all files to staging:"
+git add --renormalize .
 git add --all
 
 # Commit with the message "Added: My workouts"
